@@ -1,14 +1,15 @@
 import { LightningElement } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 export default class ExampleForm extends NavigationMixin(LightningElement) {
-    convertedAmount=0.00;
 
-    handleCurrencyChange(event){
-        console.log('handleCurrencyChange: ' + event.detail.convertedAmount);
+    convertedAmount;
+
+    handleAmountChange(event){
         this.convertedAmount = event.detail.convertedAmount;
     }
 
     handleSubmit(event){
+        event.preventDefault();
         let fields = event.detail.fields;
         fields.Amount = this.convertedAmount;
         this.template.querySelector('lightning-record-edit-form').submit(fields);

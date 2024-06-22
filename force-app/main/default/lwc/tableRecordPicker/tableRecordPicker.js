@@ -4,7 +4,6 @@ import AbstractRecordPicker from 'c/abstractRecordPicker';
 export default class TableRecordPicker extends AbstractRecordPicker {
 
     @api columns;
-    data = [{"label":"nate test","Id":"0035c00002wnoHeAAI","Name":"nate test","Email":"test@email.com"}];
 
     get fullColumns(){
         
@@ -19,7 +18,6 @@ export default class TableRecordPicker extends AbstractRecordPicker {
                 }
             }
         ];
-        console.log('tempColumns: ' + JSON.stringify(tempColumns));
         return tempColumns.concat(this.columns);
 
     }

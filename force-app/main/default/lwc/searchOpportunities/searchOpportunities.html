@@ -2,6 +2,7 @@
     <c-record-picker lwc:if={oppRecords}
         label-field="Name"
         records={oppRecords}
-        filterable-fields={fieldsToSearch}
+        filterable-fields ={fieldsToSearch}
+        onrecordpick={handleRecordSelect}
         ></c-record-picker>
 </template>

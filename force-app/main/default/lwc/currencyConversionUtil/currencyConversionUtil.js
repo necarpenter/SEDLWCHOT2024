@@ -1,3 +1,4 @@
+// Rates from USD to other currencies
 const rates = {
     'USD': 1,
     'EUR': 0.85,
@@ -7,12 +8,14 @@ const rates = {
     'CAD': 1.31,
 }
 
-export function convertCurrencyFromUSD(amount, toCurrency) {
+function convertFromUSD(amount, toCurrency){
     return amount * rates[toCurrency];
 }
 
-export function convertCurrencyToUSD(amount, fromCurrency) {
-    let inverseRate = 1/rates[fromCurrency]
+function convertToUSD(amount, fromCurrency){
+    let inverseRate = 1 / rates[fromCurrency];
     return amount * inverseRate;
 }
 
+
+export { convertFromUSD, convertToUSD };

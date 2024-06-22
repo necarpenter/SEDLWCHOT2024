@@ -1,29 +1,32 @@
 import { LightningElement, api } from 'lwc';
-import {convertCurrencyFromUSD, convertCurrencyToUSD} from 'c/currencyConversionUtil';
+import {convertFromUSD, convertToUSD} from 'c/currencyConversionUtil';
 export default class CurrencyInput extends LightningElement {
-    @api inputCurrency;
-    @api storedCurrency;
     @api label;
+    @api storedCurrency;
+    @api displayCurrency;
+
     amount;
     convertedAmount;
 
     handleAmountChange(event){
-        console.log('handleAmountChange');
         this.amount = event.target.value;
-        this.convertAmount();
-        
+        this.doConvert();
     }
 
-    convertAmount(){
-        console.log('amount: ' + this.amount);
-        console.log('inputCurrency: ' + this.inputCurrency);
-        console.log('storedCurrency: ' + this.storedCurrency);
-        if(this.inputCurrency === 'USD'){
-            this.convertedAmount = convertCurrencyFromUSD(this.amount, this.storedCurrency);
-        } else if(this.storedCurrency === 'USD'){
-            this.convertedAmount = convertCurrencyToUSD(this.amount, this.inputCurrency);
+    doConvert(){
+        if(this.displayCurrency === 'USD'){
+            this.convertedAmount = convertFromUSD(this.amount, this.storedCurrency)
+        }else{
+            this.convertedAmount = convertToUSD(this.amount, this.displayCurrency);
         }
-        console.log('Converted Amount: ' + this.convertedAmount);
-        this.dispatchEvent(new CustomEvent("currencychange", {detail:{ convertedAmount : this.convertedAmount, amount : this.amount}}));
+
+        let ammountChangeEvent  = new CustomEvent('amountchange', {
+            detail : {
+                amount : this.amount, 
+                convertedAmount : this.convertedAmount
+            }
+        });
+
+        this.dispatchEvent(ammountChangeEvent);
     }
 }

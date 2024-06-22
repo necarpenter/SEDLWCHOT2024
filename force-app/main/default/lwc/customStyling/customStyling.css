@@ -1,3 +1,4 @@
-.custom-button {
-    --slds-c-button-brand-color-background : orange;
+.custom-button{
+    --slds-c-button-brand-color-background: orange;
+    --slds-c-button-brand-color-border: orange;
 }
